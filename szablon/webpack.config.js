@@ -26,7 +26,7 @@ const entry = './main.js';
 /* Output */
 const output = {
 	path: paths.distPath,
-	filename: '[name].bundle.js'
+	filename: 'bundle.min.js'
 };
 
 /* ----------------------------- */
@@ -46,6 +46,45 @@ if (!isProduction) {
 			filename: 'main.html',
 			template: 'templates/main.pug'
 		})
+  );
+  
+  pluginsConfig.push(
+		new HtmlWebpackPlugin({
+			minify: {
+				collapseWhitespace: false,
+				html5: true,
+				removeComments: true
+			},
+			hash: false,
+			filename: 'contact.html',
+			template: 'templates/contact.pug'
+		})
+  );
+  
+  pluginsConfig.push(
+		new HtmlWebpackPlugin({
+			minify: {
+				collapseWhitespace: false,
+				html5: true,
+				removeComments: true
+			},
+			hash: false,
+			filename: 'promotion.html',
+			template: 'templates/promotion.pug'
+		})
+  );
+  
+  pluginsConfig.push(
+		new HtmlWebpackPlugin({
+			minify: {
+				collapseWhitespace: false,
+				html5: true,
+				removeComments: true
+			},
+			hash: false,
+			filename: 'text.html',
+			template: 'templates/text.pug'
+		})
 	);
 
 	pluginsConfig.push(
@@ -55,7 +94,7 @@ if (!isProduction) {
 
 if (isBuild || isProduction) {
 	pluginsConfig.push(new ExtractTextPlugin({
-		filename: 'style.css',
+		filename: 'bundle.min.css',
 		allChunks: true
 	}));
 
@@ -216,7 +255,7 @@ module.exports = {
 				use: htmlConfig
 			},
 			{
-				test: /\.(ico|jpg|png|gif|eot|otf|webp|svg|ttf|woff|woff2)(\?.*)?$/,
+				test: /\.(ico|jpg|png|gif|eot|otf|webp|svg|ttf|woff|woff2|mp4|xml|json)(\?.*)?$/,
 				use: fileConfig
 			}
 		]
